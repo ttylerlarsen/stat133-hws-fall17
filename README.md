@@ -2,10 +2,10 @@
 
 Repository for HW assignments of Stat 133 (Fall 2017)
 
-- Student name: First Last
-- Github username: usrname
+- Student name: Tyler Larsen
+- Github username: ttylerlarsen
 - Lab section: 101
-- GSI: Leia Organa
+- GSI: O. Shams Solari
 
 -----
 
