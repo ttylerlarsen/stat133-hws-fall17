@@ -1,0 +1,135 @@
+---
+title: "HW 1: More Vectors"
+subtitle: "Stat 133, Fall 2017"
+author: "Gaston Sanchez"
+output: github_document
+urlcolor: blue
+---
+  
+```{r}
+#laod data file
+load("data/nba2017-salary-points.Rdata")
+
+#view data file contents
+ls()
+```
+
+# Research Question:
+"The more points a player scores, the higher the salary?"
+
+
+## 1. A Bit of Data Processing  
+
+```{r}
+#mak salary in terms of millions
+salary_mil <- salary/1000000
+round(salary_mil, 2)
+
+#convert experience into integers
+experience_int <- experience
+experience_int[experience_int=="R"] <- 0
+experience_int <- strtoi(experience_int, 10)
+is.integer(experience_int)
+experience_int
+
+#convert position to factor, more informative data labels
+fposition <- position
+fposition[fposition=="C"] <- "center"
+fposition[fposition=="SF"] <- "small_fwd"
+fposition[fposition=="PF"] <- "power_fwd"
+fposition[fposition=="SG"] <- "shooting_guard"
+fposition[fposition=="PG"] <- "point_guard"
+fposition <- factor(fposition)
+table(fposition)
+```
+
+## 2. Scatterplot of Points and Salary
+
+```{r}
+plot(points, salary_mil, xlab = "Points", ylab = "Salary(millions)", col = "red", cex = .5, main = "Scatterplot of Points and Salary")
+```
+## 3. Correlation Between Points and Salary
+
+```{r}
+#creating the necesary variables for our calculations
+n <- length(player)
+
+#points variables
+points_mean <- 1/n * sum(points)
+round(points_mean, 2)
+points_var <- sum((points - points_mean)^2)/(n-1)
+points_sd <- sqrt(points_var)
+
+#salary variables
+salary_mean <- 1/n * sum(salary_mil)
+round(salary_mean, 2)
+salary_var <- sum((salary_mil - salary_mean)^2)/(n-1)
+salary_sd <- sqrt(salary_var)
+
+sp_cov <- (sum((salary_mil - salary_mean)*(points - points_mean)))/(n-1)
+sp_cov
+sp_cor <- sp_cov / (salary_sd * points_sd)
+sp_cor
+```
+
+## 4. Simple Linear Regression
+
+```{r}
+slope <- sp_cor * salary_sd/points_sd
+slope
+intercept<- salary_mean - (points_mean * slope)
+intercept
+y <- intercept + (slope * points)
+
+summary(y)
+```
+
+* Regression Equation: y = `r slope`x + `r intercept`
+* The slope coefficent is an indicator of how much a player's salary increases as he scores more points
+* The intercept is an indicator of what a player's expected salary is if he scores 0 points
+* Predicted Salaries:
+    + 0 points:  = $`r round(slope*0 + intercept, 2)` million
+    + 100 points:  = $`r round(slope*100 + intercept, 2)` million
+    + 500 points:  = $`r round(slope*500 + intercept, 2)` million
+    + 1000 points:  = $`r round(slope*1000 + intercept, 2)` million
+    + 2000 points:  = $`r round(slope*2000 + intercept, 2)` million
+
+## 5. Plotting the Regression Line
+
+```{r}
+plot (points, salary_mil, abline(intercept, slope))
+lines(lowess(points,salary_mil), col="blue")
+
+```
+
+##7.Exploring Position and Experience
+
+```{r}
+plot(experience_int, salary_mil)
+lines(lowess(experience_int,salary_mil), col="blue", text = "Lowess")
+# scatterplot3d(points, experience_int, salary_mil)
+#boxplot(salary_mil, position)
+```
+
+
+
+
+
+## 8. Comments and Reflections
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
