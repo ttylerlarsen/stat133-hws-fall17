@@ -214,8 +214,47 @@ dat2$TO <- as.integer(dat2$TO)
 ---------------------------------
 
 ``` r
-#subset(dat, Experience == 'R') <- 
+replace(dat$Experience, dat$Experience == "R", "0")
 ```
+
+    ##   [1] "9"  "11" "6"  "0"  "9"  "5"  "4"  "2"  "0"  "6"  "1"  "3"  "2"  "1" 
+    ##  [15] "4"  "10" "12" "11" "5"  "1"  "5"  "12" "13" "0"  "8"  "13" "5"  "13"
+    ##  [29] "15" "5"  "2"  "5"  "1"  "7"  "7"  "0"  "0"  "4"  "10" "2"  "1"  "5" 
+    ##  [43] "0"  "6"  "7"  "2"  "4"  "7"  "1"  "0"  "8"  "8"  "6"  "9"  "5"  "3" 
+    ##  [57] "0"  "0"  "3"  "0"  "3"  "12" "8"  "11" "4"  "12" "0"  "14" "3"  "10"
+    ##  [71] "3"  "10" "3"  "3"  "6"  "2"  "17" "4"  "4"  "0"  "3"  "8"  "4"  "1" 
+    ##  [85] "9"  "0"  "3"  "8"  "12" "11" "0"  "7"  "1"  "6"  "6"  "5"  "11" "1" 
+    ##  [99] "6"  "1"  "9"  "8"  "1"  "1"  "1"  "0"  "13" "3"  "1"  "5"  "2"  "3" 
+    ## [113] "2"  "0"  "10" "8"  "4"  "8"  "4"  "7"  "9"  "1"  "1"  "6"  "0"  "0" 
+    ## [127] "2"  "13" "7"  "1"  "4"  "4"  "12" "1"  "1"  "0"  "6"  "5"  "3"  "5" 
+    ## [141] "0"  "3"  "5"  "1"  "5"  "4"  "1"  "1"  "3"  "1"  "4"  "2"  "5"  "9" 
+    ## [155] "11" "4"  "4"  "8"  "9"  "0"  "13" "0"  "8"  "7"  "9"  "3"  "1"  "4" 
+    ## [169] "5"  "0"  "0"  "0"  "0"  "9"  "0"  "2"  "5"  "9"  "8"  "2"  "2"  "4" 
+    ## [183] "8"  "7"  "0"  "1"  "5"  "0"  "0"  "4"  "0"  "0"  "7"  "1"  "8"  "0" 
+    ## [197] "1"  "2"  "1"  "3"  "4"  "0"  "1"  "6"  "0"  "4"  "3"  "8"  "0"  "0" 
+    ## [211] "6"  "2"  "2"  "2"  "4"  "10" "1"  "2"  "2"  "6"  "12" "0"  "13" "4" 
+    ## [225] "3"  "2"  "8"  "9"  "1"  "5"  "13" "0"  "11" "7"  "13" "0"  "7"  "11"
+    ## [239] "0"  "0"  "3"  "9"  "1"  "5"  "2"  "10" "14" "7"  "15" "15" "2"  "0" 
+    ## [253] "2"  "8"  "0"  "7"  "0"  "11" "1"  "4"  "8"  "1"  "12" "0"  "7"  "4" 
+    ## [267] "6"  "11" "0"  "11" "8"  "0"  "10" "16" "8"  "8"  "18" "11" "6"  "5" 
+    ## [281] "13" "1"  "6"  "8"  "6"  "3"  "2"  "15" "0"  "1"  "2"  "3"  "5"  "1" 
+    ## [295] "0"  "3"  "0"  "2"  "5"  "2"  "1"  "4"  "12" "5"  "8"  "0"  "3"  "7" 
+    ## [309] "3"  "0"  "8"  "5"  "0"  "2"  "2"  "1"  "8"  "9"  "12" "3"  "18" "0" 
+    ## [323] "0"  "15" "6"  "3"  "3"  "4"  "6"  "6"  "0"  "2"  "4"  "4"  "2"  "1" 
+    ## [337] "2"  "0"  "7"  "7"  "1"  "2"  "0"  "12" "0"  "5"  "0"  "3"  "16" "1" 
+    ## [351] "8"  "4"  "8"  "6"  "4"  "1"  "0"  "7"  "6"  "4"  "5"  "4"  "7"  "6" 
+    ## [365] "0"  "3"  "2"  "0"  "3"  "12" "18" "0"  "2"  "4"  "10" "0"  "2"  "0" 
+    ## [379] "1"  "3"  "7"  "0"  "8"  "9"  "3"  "0"  "7"  "6"  "0"  "8"  "2"  "0" 
+    ## [393] "10" "0"  "7"  "7"  "1"  "2"  "2"  "8"  "6"  "3"  "7"  "1"  "0"  "1" 
+    ## [407] "7"  "5"  "3"  "1"  "2"  "0"  "9"  "1"  "0"  "0"  "2"  "2"  "1"  "12"
+    ## [421] "16" "9"  "2"  "4"  "6"  "2"  "1"  "3"  "5"  "0"  "1"  "0"  "2"  "6" 
+    ## [435] "9"  "13" "0"  "11" "2"  "0"  "15"
+
+``` r
+dat$Experience <- as.integer(dat$Experience)
+```
+
+    ## Warning: NAs introduced by coercion
 
 4. PERFORMANCE OF PLAYERS
 -------------------------
@@ -259,7 +298,7 @@ subset(dat, dat$EFF < 0)
 ```
 
     ##              Player Team Position Experience Salary Rank Age GP GS MIN FGM
-    ## 188 Patricio Garino  ORL       SG          R  31969   17  23  5  0  43   0
+    ## 188 Patricio Garino  ORL       SG         NA  31969   17  23  5  0  43   0
     ##     FGA Points3 Points3_atts Points2 Points2_atts FTM FTA OREB DREB AST
     ## 188   7       0            5       0            2   0   0    1    6   0
     ##     STL BLK TO PointsFTM missed_FG missed_FT PTS REB MPG  EFF
@@ -284,7 +323,7 @@ EFF_cor
     ## [7] -0.7722477 -0.8003289
 
 ``` r
-barplot(EFF_cor, col = "red")
+barplot(EFF_cor, col = "red", ylim = c(-1,1))
 ```
 
 ![](hw02-Tyler-Larsen_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-5-1.png)
@@ -301,33 +340,8 @@ ggplot(dat, aes(x = dat$EFF, y = dat$Salary))+
 ![](hw02-Tyler-Larsen_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-6-1.png)
 
 ``` r
-players2 <- subset(dat, dat$Experience > 19)
-head(players2)
-```
+players2 <- subset(dat, dat$MPG > 20)
 
-    ##              Player Team Position Experience   Salary Rank Age GP GS  MIN
-    ## 1        Al Horford  BOS        C          9 26540100    4  30 68 68 2193
-    ## 3     Avery Bradley  BOS       SG          6  8269663    5  26 55 55 1835
-    ## 4 Demetrius Jackson  BOS       PG          R  1450000   15  22  5  0   17
-    ## 5      Gerald Green  BOS       SF          9  1410598   11  31 47  0  538
-    ## 6     Isaiah Thomas  BOS       PG          5  6587132    1  27 76 76 2569
-    ## 7       Jae Crowder  BOS       SF          4  6286408    3  26 72 72 2335
-    ##   FGM  FGA Points3 Points3_atts Points2 Points2_atts FTM FTA OREB DREB AST
-    ## 1 379  801      86          242     293          559 108 135   95  369 337
-    ## 3 359  775     108          277     251          498  68  93   65  269 121
-    ## 4   3    4       1            1       2            3   3   6    2    2   3
-    ## 5  95  232      39          111      56          121  33  41   17   68  33
-    ## 6 682 1473     245          646     437          827 590 649   43  162 449
-    ## 7 333  720     157          394     176          326 176 217   48  367 155
-    ##   STL BLK  TO PointsFTM missed_FG missed_FT  PTS REB      MPG       EFF
-    ## 1  52  87 116       108       422        27  952 464 32.25000 19.514706
-    ## 3  68  11  88        68       416        25  894 334 33.36364 16.345455
-    ## 4   0   0   0         3         1         3   10   4  3.40000  2.600000
-    ## 5   9   7  25        33       137         8  262  85 11.44681  4.808511
-    ## 6  70  13 210       590       791        59 2199 205 33.80263 24.684211
-    ## 7  72  23  79       176       387        41  999 415 32.43056 16.069444
-
-``` r
 ggplot(players2, aes(x = players2$EFF, y = players2$Salary))+
   geom_point(aes(color = players2$Team))+
   geom_smooth(method = loess)
@@ -339,16 +353,24 @@ ggplot(players2, aes(x = players2$EFF, y = players2$Salary))+
 EFF_sal_cor <- cor(players2$EFF,players2$Salary)
 ```
 
-What can you say about the relationship between these two variables for the set of “more established players”? \*
+What can you say about the relationship between these two variables for the set of “more established players”? \* For the same efficiency, more experienced players are paid more than less experienced players.
 
 6.COMMENT AND REFLECTIONS
 -------------------------
 
 -   What things were hard, even though you saw them in class/lab?
+    -   The hardest part was definitely uploading to GitHub.
 -   What was easy(-ish) even though we haven’t done it in class/lab?
+    -   Getting comfortable with ggplot was easy becuase I am very interested in it and it is very straight forward.
 -   Did you need help to complete the assignment? If so, what kind of help?
+    -   I needed help uploading to GitHub, so I went to office hours.
 -   How much time did it take to complete this HW?
+    -   About 5 hours.
 -   What was the most time consuming part?
+    -   Definitely GitHub.
 -   Was there anything that you did not understand? or fully grasped?
+    -   I still don't really understand Terminal/Github.
 -   Was there anything frustrating in particular?
+    -   GitHub was pretty frustrating.
 -   Was there anything exciting? Something that you feel proud of? (Don’t be shy, we won’t tell anyone).
+    -   I really like all that can be done with ggplot.

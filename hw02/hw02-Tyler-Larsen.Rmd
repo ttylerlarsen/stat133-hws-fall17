@@ -75,7 +75,8 @@ dat2$TO <- as.integer(dat2$TO)
 
 ##3. RIGHT AFTER IMPORTING THE DATA
 ```{r}
-#subset(dat, Experience == 'R') <- 
+replace(dat$Experience, dat$Experience == "R", "0")
+dat$Experience <- as.integer(dat$Experience)
 ```
 
 ##4. PERFORMANCE OF PLAYERS
@@ -109,7 +110,7 @@ to_cor <- -1 * cor(dat$EFF, dat$TO)
 EFF_cor <- c(pts_cor, reb_cor, ast_cor, stl_cor, blk_cor, missed_fg_cor, missed_ft_cor, to_cor)
 EFF_cor <- sort(EFF_cor, decreasing = TRUE)
 EFF_cor
-barplot(EFF_cor, col = "red")
+barplot(EFF_cor, col = "red", ylim = c(-1,1))
 
 ```
 
@@ -119,8 +120,7 @@ ggplot(dat, aes(x = dat$EFF, y = dat$Salary))+
   geom_point(aes(color = dat$Team))+
   geom_smooth(method = loess)
 
-players2 <- subset(dat, dat$Experience > 19)
-head(players2)
+players2 <- subset(dat, dat$MPG > 20)
 
 ggplot(players2, aes(x = players2$EFF, y = players2$Salary))+
   geom_point(aes(color = players2$Team))+
@@ -130,18 +130,26 @@ EFF_sal_cor <- cor(players2$EFF,players2$Salary)
 ```
 What can you say about the relationship between these two variables for the set of
 “more established players”?
-* 
+* For the same efficiency, more experienced players are paid more than less experienced players.
 
 ##6.COMMENT AND REFLECTIONS  
 * What things were hard, even though you saw them in class/lab?
+    + The hardest part was definitely uploading to GitHub.
 * What was easy(-ish) even though we haven’t done it in class/lab?
+    + Getting comfortable with ggplot was easy becuase I am very interested in it and it is very straight forward.
 * Did you need help to complete the assignment? If so, what kind of help?
+    + I needed help uploading to GitHub, so I went to office hours.
 * How much time did it take to complete this HW?
+    + About 5 hours.
 * What was the most time consuming part?
+    + Definitely GitHub.
 * Was there anything that you did not understand? or fully grasped?
+    + I still don't really understand Terminal/Github.
 * Was there anything frustrating in particular?
+    + GitHub was pretty frustrating.
 * Was there anything exciting? Something that you feel proud of? (Don’t be shy, we
 won’t tell anyone).
+    + I really like all that can be done with ggplot.
 
 
 
