@@ -64,3 +64,65 @@ gg_pts_salary <- plot(x = teams$experience, y = teams$salary,
 
 ggsave(filename = "experience_salary.pdf", plot = gg_pts_salary,
        width = 7, height = 5)
+
+---
+  title: "hw03"
+output: github_document
+---
+  
+ 
+library(readr)
+library(ggplot2)
+library(dplyr)
+
+
+#NBA Teams ranked by Total Salary
+
+ggplot(data = teams, aes(x = reorder(team, salary), y = salary)) + 
+  geom_bar(stat = 'identity') +
+  labs(x = "Team", y = "Salary (in millions)")  +
+  geom_hline(yintercept = mean(teams$salary), color = "red", size = 1) +
+  coord_flip()
+
+
+
+#NBA Teams ranked by Total Points
+
+ggplot(data = teams, aes(x = reorder(team, points), y = points)) + 
+  geom_bar(stat = 'identity') +
+  labs(x = "Team", y = "Points")  +
+  geom_hline(yintercept = mean(teams$points), color = "red", size = 1) +
+  coord_flip()
+
+
+#NBA Teams ranked by Total Efficiency
+
+ggplot(data = teams, aes(x = reorder(team, eff), y = eff)) + 
+  geom_bar(stat = 'identity') +
+  labs(x = "Team", y = "Efficiency")  +
+  geom_hline(yintercept = mean(teams$eff), color = "red", size = 1) +
+  coord_flip()
+```
+
+#PCA
+
+
+pca_categories <- data.frame(teams$points3, teams$points2, teams$free_throws, teams$off_rebounds, teams$def_rebounds, teams$assists, teams$steals, teams$blocks, teams$turnovers, teams$fouls)
+
+pca <- prcomp(pca_categories, scale. = TRUE)
+
+pca2 <- as.data.frame(pca$x)
+pca2
+plot(pca2$PC1,pca2$PC2, main="Scatterplot Example", 
+     xlab="PCA1 ", ylab="PCA2 ", pch=19)
+
+pca3 <- (pca2$PC1-min(pca2$PC1)) / (max(pca2$PC1) - min(pca2$PC1))
+teams_pc <- data.frame(teams$team, pca3)
+
+ggplot(data = teams_pc, aes(x = reorder(teams.team, pca3), y = pca3)) + 
+  geom_bar(stat = 'identity') +
+  labs(x = "Team", y = "PCA1")  +
+  geom_hline(yintercept = mean(teams_pc$pca3), color = "red", size = 1) +
+  coord_flip()
+
+

@@ -2,7 +2,6 @@
 title: "hw03"
 output: github_document
 ---
-
 ```{r}
 library(readr)
 library(ggplot2)
