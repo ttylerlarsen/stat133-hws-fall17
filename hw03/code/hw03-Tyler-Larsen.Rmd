@@ -7,6 +7,9 @@ output: github_document
 library(readr)
 library(ggplot2)
 library(dplyr)
+
+setwd("/Users/tylerlarsen/Desktop/stat133/stat133-hws-fall17/hw03/data")
+teams <- read.csv("nba2017-teams.csv")
 ```
 
 #NBA Teams ranked by Total Salary
