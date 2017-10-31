@@ -1,0 +1,98 @@
+# ==================================================================
+# Title: Lab 6
+# Description: https://github.com/ucb-stat133/stat133-fall-2017/blob/master/labs/lab06-more-dplyr-ggplot.md
+# Input(s): what are the main inputs (list of inputs)
+# Output(s): what are the main outputs (list of outputs)
+# Author: Tyler Larsen
+# Date: 10-5-2017
+# ==================================================================
+
+setwd('/users/tylerlarsen/desktop/stat133/stat133-hws-fall17/Labs/lab06/data')
+
+# packages
+library(readr)    # importing data
+library(dplyr)    # data wrangling
+library(ggplot2)  # graphics
+
+dat <- read_csv('nba2017-player-statistics.csv')
+dat2 <- read_csv('nba2017-players.csv')
+
+warriors <- arrange(dat[dat$Team == 'GSW',], desc(Salary))
+write.csv(warriors, 'warriors.csv', row.names = FALSE)
+
+lakers <- arrange(dat[dat$Team == 'LAL',], desc(Experience))
+write.csv(lakers, 'lakers.csv', row.names = FALSE)
+
+
+
+setwd('/users/tylerlarsen/desktop/stat133/stat133-hws-fall17/Labs/lab06/output')
+
+sink(file = 'data-structure.txt')
+str(dat)
+sink()
+
+sink(file = 'summary-warriors.txt')
+summary(warriors)
+sink()
+
+sink(file = 'summary-lakers.txt')
+summary(lakers)
+sink()
+
+
+setwd('/users/tylerlarsen/desktop/stat133/stat133-hws-fall17/Labs/lab06/images')
+
+# saving a scatterplot in png format
+png(filename = "scatterplot-height-weight.png")
+plot(dat2$height, dat2$weight, pch = 20, 
+     xlab = 'Height', ylab = 'Height')
+dev.off()
+
+jpeg(filename = "age-histogram.jpeg", width = 600, height = 400)
+hist(dat$Age)
+dev.off()
+
+gg_pts_salary <- plot(x = dat2$points, y = dat2$salary,
+                      xlab = 'Points', ylab = 'Salary')
+
+ggsave(filename = "points_salary.pdf", plot = gg_pts_salary,
+       width = 7, height = 5)
+
+#display the player names of Lakers
+lakers%>%
+  select(Player)
+
+#display the name and salary of GSW point guards
+warriors%>%
+  filter(Position == 'PG')%>%
+  select(Player, Salary)
+
+#dislay the name, age, and team, of players with more than 10 years of experience, making 10 million dollars or less.
+dat2%>%
+  filter(experience > 10 & salary < 10000000)%>%
+  select(player, age, team)
+
+#select the name, team, height, and weight, of rookie players, 20 years old, displaying only the first five occurrences
+dat2%>%
+  filter (age == 20 & experience == 0)%>%
+  select(player, team, height, weight)%>%
+  head(5)
+  
+#create a data frame gsw_mpg of GSW players, that contains variables for player name, experience, and min_per_game (minutes per game), sorted by min_per_game (in descending order)
+gsw_mpg <- (
+  warriors%>%
+    select(Player, Experience)%>%
+    mutate(min_per_game = warriors$MIN / warriors$GP)%>%
+    arrange(desc(min_per_game))
+)
+
+dat%>%
+  group_by(Team)%>%
+  select(Team, Points3)%>%
+  summarise(
+    avg_threes = mean(Points3, na.rm = TRUE))%>%
+  arrange(avg_threes)%>%
+  head(5)
+
+
+

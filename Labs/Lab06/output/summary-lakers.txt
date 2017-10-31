@@ -1,0 +1,21 @@
+    Player              Team             Position          Experience            Salary              Rank             Age              GP       
+ Length:15          Length:15          Length:15          Length:15          Min.   :   73528   Min.   : 1.000   Min.   :19.00   Min.   :20.00  
+ Class :character   Class :character   Class :character   Class :character   1st Qu.: 1379670   1st Qu.: 4.500   1st Qu.:22.00   1st Qu.:31.50  
+ Mode  :character   Mode  :character   Mode  :character   Mode  :character   Median : 5281680   Median : 9.000   Median :24.00   Median :56.00  
+                                                                             Mean   : 5751279   Mean   : 8.667   Mean   :25.53   Mean   :51.67  
+                                                                             3rd Qu.: 6895500   3rd Qu.:12.500   3rd Qu.:30.00   3rd Qu.:65.00  
+                                                                             Max.   :18000000   Max.   :18.000   Max.   :37.00   Max.   :82.00  
+       GS             MIN              FGM             FGA            Points3        Points3_atts    Points2       Points2_atts      FTM       
+ Min.   : 1.00   Min.   : 160.0   Min.   : 19.0   Min.   :  68.0   Min.   :  0.00   Min.   :  1   Min.   : 10.0   Min.   : 30   Min.   : 10.0  
+ 1st Qu.: 2.50   1st Qu.: 478.5   1st Qu.: 85.0   1st Qu.: 170.0   1st Qu.:  1.00   1st Qu.:  4   1st Qu.: 75.0   1st Qu.:146   1st Qu.: 28.0  
+ Median :16.00   Median :1104.0   Median :164.0   Median : 328.0   Median : 10.00   Median : 38   Median :126.0   Median :259   Median : 59.0  
+ Mean   :26.47   Mean   :1184.9   Mean   :189.4   Mean   : 419.0   Mean   : 39.47   Mean   :116   Mean   :149.9   Mean   :303   Mean   : 72.0  
+ 3rd Qu.:50.50   3rd Qu.:1683.5   3rd Qu.:274.0   3rd Qu.: 659.5   3rd Qu.: 53.00   3rd Qu.:176   3rd Qu.:198.0   3rd Qu.:405   3rd Qu.:107.5  
+ Max.   :73.00   Max.   :2397.0   Max.   :477.0   Max.   :1071.0   Max.   :170.00   Max.   :421   Max.   :360.0   Max.   :715   Max.   :204.0  
+      FTA             OREB            DREB            AST              STL             BLK              TO        
+ Min.   : 16.0   Min.   :  5.0   Min.   : 15.0   Min.   : 11.00   Min.   : 9.00   Min.   : 2.00   Min.   :  7.00  
+ 1st Qu.: 44.0   1st Qu.: 20.5   1st Qu.: 79.0   1st Qu.: 33.50   1st Qu.:18.00   1st Qu.: 8.00   1st Qu.: 25.50  
+ Median : 78.0   Median : 49.0   Median :160.0   Median : 52.00   Median :30.00   Median :16.00   Median : 46.00  
+ Mean   : 99.2   Mean   : 60.6   Mean   :164.1   Mean   : 95.33   Mean   :39.53   Mean   :20.47   Mean   : 68.53  
+ 3rd Qu.:138.5   3rd Qu.: 94.0   3rd Qu.:215.5   3rd Qu.:131.00   3rd Qu.:49.50   3rd Qu.:34.50   3rd Qu.: 94.00  
+ Max.   :282.0   Max.   :151.0   Max.   :485.0   Max.   :303.00   Max.   :88.00   Max.   :44.00   Max.   :176.00  

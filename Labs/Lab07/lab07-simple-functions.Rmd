@@ -2,7 +2,7 @@
 title: "Lab 7: Simple Functions and Conditionals"
 subtitle: "Stat 133, Fall 2017"
 author: "Gaston Sanchez"
-output: github_document
+output: html_document
 fontsize: 12pt
 urlcolor: blue
 ---
@@ -28,53 +28,31 @@ Write two functions `f()` and `g()` based on the previous equations.
 
 ```{r}
 # your function f()
-
+f <- function(x) {
+  result <- x*x
+  return(result)
+}
 ```
 
 ```{r}
 # your function g()
-
+g <- function(x) {
+  result <- x*2 + 5
+  return(result)
+}
 ```
 
 \bigskip
 
 Test your functions with:
 
-```r
+```{r}
 f(2)
 f(-5)
 
 g(0)
 g(-5/2)
 ```
-
-Write code to create the following composite functions:
-
-- `fog()` for the composite function: $f \circ g(x)$
-- `gof()` for the composite function: $g \circ f(x)$
-
-```{r}
-# your function fog()
-
-```
-
-```{r}
-# your function gof()
-
-```
-
-Test your composite functions with:
-
-```r
-fog(2)
-fog(-5)
-
-gof(0)
-gof(-5/2)
-```
-
-
------
 
 
 ## Pythagoras
@@ -89,21 +67,27 @@ returns the length of the hypotenuse:
 
 ```{r}
 # your pythagoras() function
-
+pythagoras <- function(x, y) {
+  result <- sqrt(x*x + y*y)
+  return(result)
+}
 ```
 
 Test your `pythagoras()` with two leg values: `pythagoras(3, 4)`
 
 ```{r}
 # your test
-
+pythagoras(3, 4)
 ```
 
 Modify your function `pythagoras()` so that argument `b` takes the same value of argument `a`. Test it with just one leg value: `pythagoras(5)`
 
 ```{r}
 # your test
-
+pythagoras2 <- function(x) {
+  result <- sqrt(x*x + x*x)
+  return(result)
+}
 ```
 
 
@@ -122,8 +106,9 @@ Write a function `miles2kms()` that converts miles into kilometers: 1 mile
 is equal to 1.6 kilometers. Give the argument a default value of 1.
 
 ```{r}
-miles2kms <- function() {
-  # fill in
+miles2kms <- function(miles) {
+  kms <- miles*1.6
+  return(kms)
 }
 ```
 
@@ -141,6 +126,11 @@ and then from 10 to 100 in 10 mile steps. The second column corresponds to kms.
 |  ...  | ... |
 | 100   | 160 |
 
+```{r}
+miles <- c(1:100)
+kms <-miles2kms(miles)
+miles_kms <- data.frame(miles, kms)
+```
 
 ### Gallons to Liters, and viceversa
 
@@ -149,13 +139,19 @@ is equal to 3.78541 liters:
 
 ```{r}
 # your gallons2liters() function
-
+gallons2liters <- function(gallons) {
+  liters <- gallons*3.78541
+  return(liters)
+}
 ```
 
 Use `gallon2liters()` to make an inverse function `liters2gallons()`.
 
 ```{r}
 # your liters2gallons() function
+liters2gallons <- function(liters){
+  gallons <- liters / 3.78541
+}
 
 ```
 
@@ -173,6 +169,11 @@ and then from 10 to 100 in 10 liter steps. The second column corresponds to gall
 |  ...   | ...       |
 | 100    | 26.417218 |
 
+```{r}
+liters <- c(1:100)
+gallons <- liters2gallons(liters)
+liters_gallons <- data.frame(liters, gallons)
+```
 
 
 ### Seconds to Years
@@ -187,7 +188,12 @@ Test the function with `seconds2years(1000000000)`
 
 ```{r}
 # your code
+seconds2years <- function(seconds) {
+  years <- seconds / 31557600 
+  return(years)
+}
 
+seconds2years(1000000000)
 ```
 
 
@@ -209,7 +215,10 @@ Evaluate the function with $m = 0$, $s = 2$, and $x = 1$.
 
 ```{r}
 # your code
-
+gaussian <- function(x, m, s) {
+  result <- (1 / (s*sqrt(2*3.1415))) * exp((-1/2)*((x-m)/s)*(x-m)/s)
+  return(result)
+}
 ```
 
 Test your `gaussian()` function and compare it with the R function `dnorm()`
@@ -217,6 +226,7 @@ Test your `gaussian()` function and compare it with the R function `dnorm()`
 ```{r}
 # compare with dnorm()
 dnorm(x = 1, mean = 0, sd = 2)
+gaussian (x=1, m=0, s=2)
 ```
 
 Now try `gaussian()` with a vector `seq(-4.5, 4.5, by = 0.1)`, and pass the values
@@ -233,6 +243,8 @@ Your turn:
 
 ```{r}
 # your code
+y_values2 <- gaussian(x_values, m = 0, s = 2)
+plot(x_values, y_values2, las = 1, type = "l", lwd = 2)
 ```
 
 
@@ -273,6 +285,25 @@ Write functions and graph the following polynomials in the x-axis interval
 a. $f(x) = x^3$ 
 b. $f(x) = (x^2 - 1)(x + 3)^3$
 c. $f(x) = (x^2 - 1)(x^2 - 9)$
+```{r}
+poly_a <- function(x){
+  y <- x*x*x
+return(y)
+}
+poly_b <- function(x){
+  y <- (x^2 - 1)(x + 3)^3
+  return(y)
+}
+
+x <- seq(-4, 4, length.out = 20)
+y <- poly_a(x)
+a_plot <- plot(x, y, type = 'l', lwd = 3, col = "#FB7215", las = 1)
+abline(h = 0, v = 0, col = '#888888aa', lwd = 1.5)
+title(main = expression(paste(f(x), ' = ', x^3)))
+
+
+
+```
 
 
 -----
@@ -295,10 +326,13 @@ returns a named vector with the following descriptive statistics:
 
 ```{r}
 # your descriptive() function
-descriptive <- function() {
-  # fill in
-
+descriptive <- function(x) {
+  y <- c(summary(x))
+  return (y)
 }
+
+x <- c(2, 4, 6, 8, 10)
+descriptive(x)
 ```
 
 
@@ -345,6 +379,15 @@ factorial(4)
 # you should be able to call combinations() like this
 combinations(n = 5, k = 2)
 ```
+```{r}
+combinations <- function(n, k){
+  y <- factorial(n) / (factorial(n-k)*factorial(k))
+  return(y)
+}
+
+choose(5, 2)
+combinations(5, 2)
+```
 
 - Use your `combinations()` function to write a `binom_prob()` function that 
 computes binomial probabilities. The arguments should be `n`, `k`, 
@@ -354,6 +397,14 @@ and `prob`. Here's an example of you should be able to call the function:
 # (assuming prob of success = 0.5)
 binom_prob(n = 5, k = 2, prob = 0.5)
 ```
+```{r}
+binom_prob <- function(n, k, prob){
+  y <- combinations(n, k) * prob^k * (1-prob)^(n-k)
+  return(y)
+}
+binom_prob(n = 5, k = 4, prob = 0.4)
+
+```
 
 - Use `binom_prob()` to obtain the probability of getting more than 3 heads in 5 tosses
 with a biased coin of 35% chance of heads.
@@ -361,6 +412,12 @@ with a biased coin of 35% chance of heads.
 - Consider rolling a fair die 10 times. Use `binom_prob()` to find the probability 
 of getting exactly 3 sixes?
 
+```{r}
+k <- c(3, 4, 5)
+prob1<- sum(binom_prob(5, k, .35))
+
+prob2 <- binom_prob(10, 3, 1/6)
+```
 
 ------
 
@@ -372,16 +429,17 @@ number less than 0 is replaced by 0 and a number greater than 100 is replaced
 by 100.
 
 ```{r}
-z <- 100*pi
+z <- 10*pi
 # Fill in the following if-else statements. You may (or may not) 
 # have to add or subtract else if or else statements.
-if (TRUE) { # Replace TRUE with a condition.
-  
-} else if (TRUE) { # Replace TRUE with a condition.
-  
+if (z > 100) { # Replace TRUE with a condition.
+  z <- 100
+} else if (z < 0) { # Replace TRUE with a condition.
+  z <- 0
 } else {
-  
+ z <- z 
 }
+z
 ```
 
 ### Multiple If's
@@ -408,6 +466,18 @@ Write a function `is_even()` that determines whether a number is even
 (i.e. multiple of 2). If the input number is even, the output should be 
 `TRUE`. If the input number is odd, the output should be `FALSE`. 
 If the input is not a number, the output should be `NA` 
+```{r}
+is_even <- function(x){
+  if (typeof(x) != "double")
+    return ('NA')
+  else if ((x %% 2) == 0)
+    return ('TRUE')
+  else if ((x %% 2) == 1)
+    return('FALSE')
+  else
+    return('ERROR')
+}
+```
 
 Test your function:
 ```{r eval = FALSE}
@@ -420,14 +490,22 @@ is_even(33)
 # not a number
 is_even('a')
 ```
-
-
 ## Odd number
 
 Use your function `is_even()` to write a function `is_odd()` that determines 
 if a number is odd (i.e. not a multiple of 2). If a number is odd, the output 
 should be `TRUE`; if a number is even the output should be `FALSE`; if the 
 input is not a number the output should be `NA`
+```{r}
+is_odd <- function(x){
+  if (is_even(x) == 'TRUE')
+    return(is_even(x+1))
+  else if (is_even(x) == 'FALSE')
+    return(is_even(x+1))
+  else if (is_even(x) == 'NA')
+    return (is_even(x))
+}
+```
 
 Test `is_odd()` with the following cases:
 ```{r eval = FALSE}
@@ -521,6 +599,24 @@ Write a function `grade()` that takes a `score` argument (i.e. a numeric value b
 | [70 - 80)  |  `"C"`  |
 | [60 - 70)  |  `"D"`  |
 | < 60       |  `"F"`  |
+```{r}
+grade <- function(score){
+  if (score > 100 || score < 0)
+    return ("score must be a number between 0 and 100")
+  else if (score > 90 || score == 90)
+    return('A')
+  else if (score > 80 || score == 80)
+    return('B')
+  else if (score > 70 || score == 70)
+    return('C')
+  else if (score > 60 || score == 60)
+    return('D')
+  else if (score > 0 || score ==0)
+    return('F')
+  else
+    stop("score must be a number between 0 and 100")
+}
+```
 
 You should be able to call your `grade()` function like this:
 
@@ -536,6 +632,8 @@ grade(score = 70.0000001)
 
 # grade "F"
 grade(score = 50)
+
+grade(-4)
 ```
 
 
@@ -576,8 +674,8 @@ to choose a corresponding element:
 ```{r}
 # Convert a number into a day of the week.
 day_num <- 3 # Change this value!
-
-switch(day_num,
+day_num2 <- function(day_num){
+y <- switch(day_num,
   "Sunday",
   "Monday",
   "Tuesday",
@@ -585,6 +683,10 @@ switch(day_num,
   "Thursday",
   "Friday",
   "Saturday")
+return(y)
+}
+
+day_num2(day_num)
 ```
 
 ## Converting Miles to other units
@@ -607,6 +709,30 @@ must take one argument `x` with default value: `x = 1`.
 - `miles2yards()`
 - `miles2meters()`
 - `miles2kms()`
+```{r}
+miles2inches <- function(x){
+  inches <- x * 63360
+  return(inches)
+}
+miles2feet <- function(x){
+  feet <- x * 5280
+  return(feet)
+}
+miles2yards <- function(x){
+  yards <- x * 1760
+  return(yards)
+}
+miles2meters <- function(x){
+  meters <- x * 1/0.00062137
+  return(meters)
+}
+miles2kms <- function(x){
+  kms <- x * 1/0.62136
+  return(kms)
+}
+
+
+```
 
 For example: 
 ```{r eval = FALSE}
@@ -625,19 +751,26 @@ Create a function `convert()` that converts miles into the specified units.
 Use `switch()` and the previously defined functions---`miles2inches()`, 
 `miles2feet()`, ..., `miles2kms`---to define `convert()`. Use two arguments: 
 `x` and `to`, like this:
-```{r, eval=FALSE}
-convert(40, to = "in")
+```{r}
+convert <- function(x, to){
+ y <- switch(to, 
+         inch = miles2inches(x),
+         ft = miles2feet(x),
+         yd = miles2yards(x),
+         m =  miles2meters(x),
+         km = miles2kms(x)
+         )
+  return(y)
+}
 ```
 
 By default, `to = "km"`, but it can take values such as `"in"`, `"ft"`, `"yd"`, or `"m"`.
 
 Test `convert()` with:
 ```{r eval=FALSE}
-convert(3, "in")
+convert(3, "inch")
 convert(3, "ft")
 convert(3, "yd")
 convert(3, "m")
 convert(3, "km")
 ```
-
-
