@@ -2,7 +2,7 @@
 title: "Lab 9: Random Number and Simulations"
 subtitle: "Stat 133, Fall 2017"
 author: "Gaston Sanchez"
-output: html_document
+output: github_document
 fontsize: 11pt
 urlcolor: blue
 ---

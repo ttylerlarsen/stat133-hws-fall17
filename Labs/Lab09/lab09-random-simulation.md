@@ -85,19 +85,45 @@ The random experiment consists of generating a random number that follows a unif
 
 ``` r
 # your vectors box1 and box2
+box1 <- c('blue', 'blue', 'red')
+box2 <- c('blue', 'blue', 'red', 'red', 'red', 'red', 'white')
 ```
 
 1.  The random experiment involves generating a uniform random number using `runif(1)`. If this number is greater than 0.5, get a `sample()` without replacement of `size = 4` from `box1.` Otherwise, get a `sample()` without replacement of `size = 4` from `box2`.
 
 ``` r
 # your code to simulate one random experiment
+rand_num <- runif(1)
+
+
+if (rand_num > .5)
+  {
+  sample(box1, size = 4, replace = TRUE) # w/ replacement
+  }
+if (rand_num < .5) 
+  {
+  sample(box2, size = 4, replace = FALSE) # w/o replacement
+  }
 ```
+
+    ## [1] "red"   "white" "red"   "red"
 
 1.  Repeat the experiment 1000 times using a `for` loop. To store the drawn samples, use a matrix `drawn_balls`. This matrix will have 1000 rows and 4 columns. In each row you assign the output of a random sample of balls.
 
 ``` r
-# your code to draw the balls according to the random experiment
+drawn_balls <- list()
+
 # (repeated 1000 times)
+for (i in 1:1000)
+{
+  rand_num <- runif(1)
+  if (rand_num > .5)
+    result <- sample(box1, size = 4, replace = TRUE) # w/ replacement
+  else if (rand_num < .5)
+    result <- sample(box2, size = 4, replace = FALSE) # w/o replacement
+  drawn_balls[[i]] <- result
+}
+drawn_balls <- as.data.frame(do.call("rbind", drawn_balls)) 
 ```
 
 Your matrix `drawn_balls` could look like this (first five rows):
@@ -111,9 +137,116 @@ Your matrix `drawn_balls` could look like this (first five rows):
 
 1.  Once you filled the matrix `drawn_balls`, compute the proportion of samples containing: 0, 1, 2, 3, or 4 blue balls.
 
+``` r
+count <- 0
+blue0 <- 0
+blue1 <- 0
+blue2 <- 0
+blue3 <- 0
+blue4 <- 0
+blue0_prob <- 0
+blue1_prob <- 0
+blue2_prob <- 0
+blue3_prob <- 0
+blue4_prob <- 0
+probs <- list()
+
+for (i in 1:1000){
+  for (j in 1:4){
+    if (drawn_balls[i, j] == 'blue')
+      count <- count + 1
+  }
+  if (count == 0){
+    blue0 <- blue0 + 1
+    blue0_prob <- blue0 / i
+  }
+  else if (count == 1){
+    blue1 <- blue1 + 1
+    blue1_prob <- blue1 / i
+  }
+  else if (count == 2){
+    blue2 <- blue2 + 1
+    blue2_prob <- blue2 / i
+  }
+  else if (count == 3){
+    blue3 <- blue3 + 1
+    blue3_prob <- blue3 / i
+  }
+  else if (count == 4){
+    blue4 <- blue4 + 1
+    blue4_prob <- blue4 / i
+  }
+  
+  prob_v <- (c(i, blue0_prob, blue1_prob, blue2_prob, blue3_prob, blue4_prob))
+  probs[[i]] <-  prob_v
+  
+  count <- 0
+}
+
+probs <- as.data.frame(do.call("rbind", probs))
+
+#convert counts to probabilities/ratios
+blue0_prob <- blue0 / 1000
+blue1_prob <- blue1 / 1000
+blue2_prob <- blue2 / 1000
+blue3_prob <- blue3 / 1000
+blue4_prob <- blue4 / 1000
+
+blue0_prob
+```
+
+    ## [1] 0.094
+
+``` r
+blue1_prob
+```
+
+    ## [1] 0.333
+
+``` r
+blue2_prob
+```
+
+    ## [1] 0.292
+
+``` r
+blue3_prob
+```
+
+    ## [1] 0.177
+
+``` r
+blue4_prob
+```
+
+    ## [1] 0.104
+
+``` r
+#test to make sure the probabilites add up to 1
+blue0_prob+blue1_prob+blue2_prob+blue3_prob+blue4_prob
+```
+
+    ## [1] 1
+
 1.  Try to obtain the following plot showing the relative frequencies of number of blue balls over the series of repetitions.
 
 <img src="freqs-plot.png" width="80%" style="display: block; margin: auto;" />
+
+``` r
+library(ggplot2)
+library(tidyr)
+```
+
+    ## Warning: package 'tidyr' was built under R version 3.4.2
+
+``` r
+probs %>%
+    gather(key,value, V2, V3, V4, V5, V6) %>%
+    ggplot(aes(x=V1, y=value, colour=key)) +
+    geom_line()
+```
+
+![](lab09-random-simulation_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-7-1.png)
 
 ------------------------------------------------------------------------
 
