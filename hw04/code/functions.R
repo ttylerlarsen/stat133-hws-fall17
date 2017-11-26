@@ -179,7 +179,7 @@ print_stats <- function(lst){
     sprintf('%0.4f', num)}
   name <- names(lst)
   outcome <- c()
-  for (i in 1:length(lst)){
+  for (i in 1:length(lst)-1){
     if (nchar(name[i])==max(nchar(names(lst)))){
       cat(name[i], ": ", formulate(lst[[i]]), "\n", sep = "")
     }

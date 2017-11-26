@@ -58,7 +58,8 @@ ui <- fluidPage(
                            ),
                   tabPanel("Histogram", value = 2, 
                            ggvisOutput("histogram"),
-                           tableOutput("sum_stats")),
+                           h4("Summary Stats"),
+                           verbatimTextOutput("sum_stats")),
                   tabPanel("Scatterplot", value = 3, 
                            ggvisOutput("scatterplot"),
                            h4("Correlation:"),
@@ -102,7 +103,7 @@ server <- function(input, output) {
   vis_histogram %>% bind_shiny("histogram")
   
   #summary stats
-  output$sum_stats <- renderTable({
+  output$sum_stats <- renderPrint({
     col <- select(dat, input$var2)
     print_stats(summary_stats(col))
   })   
