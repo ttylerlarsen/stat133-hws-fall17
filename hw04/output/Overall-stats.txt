@@ -1,12 +1,11 @@
-List of 11
- $ minimum  : num 26.7
- $ percent10: num 59.9
- $ quartile1: num 75.7
- $ median   : num 83.4
- $ mean     : num 79.9
- $ quartile3: num 89.1
- $ percent90: num 92.5
- $ maximum  : num 100
- $ range    : num 73.3
- $ stdev    : num 13.4
- $ missing  : int 0
+minimum  : 26.7146
+percent10: 59.9027
+quartile1: 75.6627
+median   : 83.4469
+mean     : 79.8985
+quartile3: 89.0510
+percent90: 92.4969
+maximum  : 100.0000
+range    : 73.2854
+stdev    : 13.3536
+missing  : 0.0000

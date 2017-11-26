@@ -4,6 +4,7 @@
 # author: "Tyler Larsen"
 ###################################
 
+#if not already, must set wd to where this file is located
 source('functions.R')
 dat <- read.csv('../data/rawdata/rawscores.csv', stringsAsFactors = FALSE)
 

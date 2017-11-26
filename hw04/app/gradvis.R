@@ -92,8 +92,6 @@ server <- function(input, output) {
   #############################################################
   vis_histogram <- reactive({
     var2 <- prop("x", as.symbol(input$var2))
-    col <- input$var2
-    df <- print_stats(summary_stats(dat$col))
     
     dat %>% 
       ggvis(x = var2, fill := "#abafb5") %>% 
@@ -101,12 +99,6 @@ server <- function(input, output) {
                        width = input$width2)
   })
   vis_histogram %>% bind_shiny("histogram")
-  
-  x <- input$var2
-
-  output$sum_stats <- renderTable({
-    #placeholder df, need to fix print_stats function
-  })   
   #############################################################
   
   
@@ -122,7 +114,6 @@ server <- function(input, output) {
     var3 <- prop("x", as.symbol(input$var3))
     var4 <- prop("y", as.symbol(input$var4))
     opacity <- input$var5
-    
     
     if (input$var6 == "Lm")
     {
@@ -144,27 +135,18 @@ server <- function(input, output) {
       ggvis(x = var3, y = var4, fill := "000000", opacity := input$var5) %>% 
       layer_points()
     }
-
-    
   })
   vis_histogram %>% bind_shiny("scatterplot")
   
+  #correlation
   output$correlation <- renderText({
-     # how do you get data from the col that corresponds to var3/4?
+    x <- select(dat, input$var3)
+    y <- select(dat, input$var4)
+    cor(x, y)
   })   
   
   #############################################################
 }
-
-
-
-
-
-
-
-
-
-
 
 
 # Run the application 
