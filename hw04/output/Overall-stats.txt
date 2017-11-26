@@ -1,0 +1,12 @@
+List of 11
+ $ minimum  : num 26.7
+ $ percent10: num 59.9
+ $ quartile1: num 75.7
+ $ median   : num 83.4
+ $ mean     : num 79.9
+ $ quartile3: num 89.1
+ $ percent90: num 92.5
+ $ maximum  : num 100
+ $ range    : num 73.3
+ $ stdev    : num 13.4
+ $ missing  : int 0
