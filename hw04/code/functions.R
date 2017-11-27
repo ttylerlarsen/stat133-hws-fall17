@@ -174,12 +174,15 @@ summary_stats <- function(x){
 # input: list of summary stats
 # output: data frame of stats?
 ###################################
+# Prints the value in a nice format
 print_stats <- function(lst){
+  
   formulate <- function(num){
     sprintf('%0.4f', num)}
+  
   name <- names(lst)
   outcome <- c()
-  for (i in 1:length(lst)-1){
+  for (i in 1:length(lst)){
     if (nchar(name[i])==max(nchar(names(lst)))){
       cat(name[i], ": ", formulate(lst[[i]]), "\n", sep = "")
     }
@@ -189,7 +192,8 @@ print_stats <- function(lst){
     }
   }
 }
-
+formulate <- function(num){
+  sprintf('%0.4f', num)}
 ###################################
 # title: "rescale100"
 # description: compute a rescaled vector with a potential scale from 0 to 100
@@ -262,9 +266,9 @@ score_lab <- function(x){
 
 ###################################
 # title: "hwq_aggregator"
-# description: helps tabulate the final scores in the hw and quiz categories
+# description: Tabulates the final scores in the hw and quiz categories for each student
 # input: dataframe consisting of hw or quiz scores
-# output: vector with corresponding final scores for each student
+# output: column vector with corresponding final scores for each student
 ###################################
 hwq_aggregator <- function(df){
   df <- t(df)
