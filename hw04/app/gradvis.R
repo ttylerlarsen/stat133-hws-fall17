@@ -9,19 +9,16 @@ library(shiny)
 library(ggvis)
 library(dplyr)
 
-# convert some variables as factors, for barcharts
-
+# convert Grade col to factor, for barchart
 dat$Grade <- factor(dat$Grade, 
                     levels = c('A+', 'A', 'A-','B+','B', 
                                'B-','C+', 'C', 'C-', 'D', 'F'))
-
 
 # Variable names for histograms
 dat_cols <- c("HW1", "HW2", "HW3", "HW4", "HW5", "HW6", "HW7","HW8", "HW9",
               "ATT", "QZ1", "QZ2", "QZ3", "QZ4", "EX1","EX2", "Test1",
               "Test2", "Lab", "Homework", "Quiz","Overall")
 lines <- c("None", "Lm", "Loess")
-
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -49,8 +46,8 @@ ui <- fluidPage(
                                    min = 0, max = 1, value = .5),
                        radioButtons("var6", "Show lines", lines,
                                     selected = "None"))
-      
     ),
+    
     mainPanel(
       tabsetPanel(type = "tabs",
                   tabPanel("Barchart", value = 1, 
@@ -75,23 +72,18 @@ server <- function(input, output) {
   
   #Barchart (for 1st tab)
   ###################################################################
-  vis_barchart <- ggvis(dat, ~factor(Grade), fill := "#7DA8F1") %>% #
-    add_axis("x", title = "Grade") %>%                              #
-    add_axis("y", title = "Frequency")                              #
-  vis_barchart %>% bind_shiny("barchart")                           #
-                                                                    #
-  output$freq_chart <- renderTable({                                #
-    freq_table                                                      #
-    })                                                              #
+  vis_barchart <- ggvis(dat, ~factor(Grade), fill := "#7DA8F1") %>% 
+    add_axis("x", title = "Grade") %>%
+    add_axis("y", title = "Frequency")
+  vis_barchart %>% bind_shiny("barchart") 
+  output$freq_chart <- renderTable({
+    freq_table
+    }) 
   ###################################################################
   
   
-  
-  
-  
-  
   # Histogram (for 2nd tab)
-  #############################################################
+  ###################################################################
   vis_histogram <- reactive({
     var2 <- prop("x", as.symbol(input$var2))
     
@@ -107,17 +99,11 @@ server <- function(input, output) {
     col <- select(dat, input$var2)
     print_stats(summary_stats(col))
   })   
-  #############################################################
-  
-  
-  
-  
-  
-  
-  
-  
+  ###################################################################
+
+
   # Scatterplot (for 3rd tab)
-  #############################################################
+  ###################################################################
   vis_histogram <- reactive({
     var3 <- prop("x", as.symbol(input$var3))
     var4 <- prop("y", as.symbol(input$var4))
@@ -152,11 +138,8 @@ server <- function(input, output) {
     y <- select(dat, input$var4)
     cor(x, y)
   })   
-  
-  #############################################################
+  ###################################################################
 }
-
 
 # Run the application 
 shinyApp(ui = ui, server = server)
-
